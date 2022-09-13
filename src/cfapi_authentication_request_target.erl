@@ -1,10 +1,10 @@
--module(cfclient_authentication_request_target).
+-module(cfapi_authentication_request_target).
 
 -export([encode/1]).
 
--export_type([cfclient_authentication_request_target/0]).
+-export_type([cfapi_authentication_request_target/0]).
 
--type cfclient_authentication_request_target() ::
+-type cfapi_authentication_request_target() ::
     #{ 'identifier' := binary(),
        'name' => binary(),
        'anonymous' => boolean(),

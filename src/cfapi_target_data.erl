@@ -1,10 +1,10 @@
--module(cfclient_target_data).
+-module(cfapi_target_data).
 
 -export([encode/1]).
 
--export_type([cfclient_target_data/0]).
+-export_type([cfapi_target_data/0]).
 
--type cfclient_target_data() ::
+-type cfapi_target_data() ::
     #{ 'identifier' := binary(),
        'name' := binary(),
        'attributes' := list()

@@ -1,18 +1,18 @@
--module(cfclient_feature_config).
+-module(cfapi_feature_config).
 
 -export([encode/1]).
 
--export_type([cfclient_feature_config/0]).
+-export_type([cfapi_feature_config/0]).
 
--type cfclient_feature_config() ::
+-type cfapi_feature_config() ::
     #{ 'project' := binary(),
        'environment' := binary(),
        'feature' := binary(),
-       'state' := cfclient_feature_state:cfclient_feature_state(),
+       'state' := cfapi_feature_state:cfapi_feature_state(),
        'kind' := binary(),
        'variations' := list(),
        'rules' => list(),
-       'defaultServe' := cfclient_serve:cfclient_serve(),
+       'defaultServe' := cfapi_serve:cfapi_serve(),
        'offVariation' := binary(),
        'prerequisites' => list(),
        'variationToTargetMap' => list(),

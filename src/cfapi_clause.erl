@@ -1,10 +1,10 @@
--module(cfclient_clause).
+-module(cfapi_clause).
 
 -export([encode/1]).
 
--export_type([cfclient_clause/0]).
+-export_type([cfapi_clause/0]).
 
--type cfclient_clause() ::
+-type cfapi_clause() ::
     #{ 'id' => binary(),
        'attribute' := binary(),
        'op' := binary(),

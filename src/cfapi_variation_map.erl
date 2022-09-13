@@ -1,10 +1,10 @@
--module(cfclient_variation_map).
+-module(cfapi_variation_map).
 
 -export([encode/1]).
 
--export_type([cfclient_variation_map/0]).
+-export_type([cfapi_variation_map/0]).
 
--type cfclient_variation_map() ::
+-type cfapi_variation_map() ::
     #{ 'variation' := binary(),
        'targets' => list(),
        'targetSegments' => list()

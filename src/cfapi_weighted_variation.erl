@@ -1,10 +1,10 @@
--module(cfclient_weighted_variation).
+-module(cfapi_weighted_variation).
 
 -export([encode/1]).
 
--export_type([cfclient_weighted_variation/0]).
+-export_type([cfapi_weighted_variation/0]).
 
--type cfclient_weighted_variation() ::
+-type cfapi_weighted_variation() ::
     #{ 'variation' := binary(),
        'weight' := integer()
      }.

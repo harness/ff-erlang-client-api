@@ -1,10 +1,10 @@
--module(cfclient_segment).
+-module(cfapi_segment).
 
 -export([encode/1]).
 
--export_type([cfclient_segment/0]).
+-export_type([cfapi_segment/0]).
 
--type cfclient_segment() ::
+-type cfapi_segment() ::
     #{ 'identifier' := binary(),
        'name' := binary(),
        'environment' => binary(),

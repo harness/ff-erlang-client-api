@@ -1,10 +1,10 @@
--module(cfclient_get_evaluations_200_response).
+-module(cfapi_get_evaluations_200_response).
 
 -export([encode/1]).
 
--export_type([cfclient_get_evaluations_200_response/0]).
+-export_type([cfapi_get_evaluations_200_response/0]).
 
--type cfclient_get_evaluations_200_response() ::
+-type cfapi_get_evaluations_200_response() ::
     #{ 'version' => integer(),
        'pageCount' := integer(),
        'itemCount' := integer(),

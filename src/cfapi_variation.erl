@@ -1,10 +1,10 @@
--module(cfclient_variation).
+-module(cfapi_variation).
 
 -export([encode/1]).
 
--export_type([cfclient_variation/0]).
+-export_type([cfapi_variation/0]).
 
--type cfclient_variation() ::
+-type cfapi_variation() ::
     #{ 'identifier' := binary(),
        'value' := binary(),
        'name' => binary(),

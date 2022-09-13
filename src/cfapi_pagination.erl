@@ -1,10 +1,10 @@
--module(cfclient_pagination).
+-module(cfapi_pagination).
 
 -export([encode/1]).
 
--export_type([cfclient_pagination/0]).
+-export_type([cfapi_pagination/0]).
 
--type cfclient_pagination() ::
+-type cfapi_pagination() ::
     #{ 'version' => integer(),
        'pageCount' := integer(),
        'itemCount' := integer(),

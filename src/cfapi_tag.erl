@@ -1,10 +1,10 @@
--module(cfclient_tag).
+-module(cfapi_tag).
 
 -export([encode/1]).
 
--export_type([cfclient_tag/0]).
+-export_type([cfapi_tag/0]).
 
--type cfclient_tag() ::
+-type cfapi_tag() ::
     #{ 'name' := binary(),
        'value' => binary()
      }.

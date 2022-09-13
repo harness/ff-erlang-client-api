@@ -1,10 +1,10 @@
--module(cfclient_evaluation).
+-module(cfapi_evaluation).
 
 -export([encode/1]).
 
--export_type([cfclient_evaluation/0]).
+-export_type([cfapi_evaluation/0]).
 
--type cfclient_evaluation() ::
+-type cfapi_evaluation() ::
     #{ 'flag' := binary(),
        'value' := binary(),
        'kind' := binary(),

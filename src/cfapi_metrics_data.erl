@@ -1,10 +1,10 @@
--module(cfclient_metrics_data).
+-module(cfapi_metrics_data).
 
 -export([encode/1]).
 
--export_type([cfclient_metrics_data/0]).
+-export_type([cfapi_metrics_data/0]).
 
--type cfclient_metrics_data() ::
+-type cfapi_metrics_data() ::
     #{ 'timestamp' := integer(),
        'count' := integer(),
        'metricsType' := binary(),

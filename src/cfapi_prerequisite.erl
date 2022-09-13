@@ -1,10 +1,10 @@
--module(cfclient_prerequisite).
+-module(cfapi_prerequisite).
 
 -export([encode/1]).
 
--export_type([cfclient_prerequisite/0]).
+-export_type([cfapi_prerequisite/0]).
 
--type cfclient_prerequisite() ::
+-type cfapi_prerequisite() ::
     #{ 'feature' := binary(),
        'variations' := list()
      }.

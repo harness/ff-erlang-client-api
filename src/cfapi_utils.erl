@@ -1,4 +1,4 @@
--module(cfclient_utils).
+-module(cfapi_utils).
 
 -export([request/8,
          select_header_content_type/1,

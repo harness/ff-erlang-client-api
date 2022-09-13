@@ -1,11 +1,11 @@
--module(cfclient_serve).
+-module(cfapi_serve).
 
 -export([encode/1]).
 
--export_type([cfclient_serve/0]).
+-export_type([cfapi_serve/0]).
 
--type cfclient_serve() ::
-    #{ 'distribution' => cfclient_distribution:cfclient_distribution(),
+-type cfapi_serve() ::
+    #{ 'distribution' => cfapi_distribution:cfapi_distribution(),
        'variation' => binary()
      }.
 

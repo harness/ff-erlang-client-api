@@ -1,14 +1,14 @@
--module(cfclient_serving_rule).
+-module(cfapi_serving_rule).
 
 -export([encode/1]).
 
--export_type([cfclient_serving_rule/0]).
+-export_type([cfapi_serving_rule/0]).
 
--type cfclient_serving_rule() ::
+-type cfapi_serving_rule() ::
     #{ 'ruleId' => binary(),
        'priority' := integer(),
        'clauses' := list(),
-       'serve' := cfclient_serve:cfclient_serve()
+       'serve' := cfapi_serve:cfapi_serve()
      }.
 
 encode(#{ 'ruleId' := RuleId,

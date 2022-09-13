@@ -1,10 +1,10 @@
--module(cfclient_error).
+-module(cfapi_error).
 
 -export([encode/1]).
 
--export_type([cfclient_error/0]).
+-export_type([cfapi_error/0]).
 
--type cfclient_error() ::
+-type cfapi_error() ::
     #{ 'code' := binary(),
        'message' := binary(),
        'details' => maps:map()

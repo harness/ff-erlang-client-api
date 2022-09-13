@@ -1,10 +1,10 @@
--module(cfclient_target_map).
+-module(cfapi_target_map).
 
 -export([encode/1]).
 
--export_type([cfclient_target_map/0]).
+-export_type([cfapi_target_map/0]).
 
--type cfclient_target_map() ::
+-type cfapi_target_map() ::
     #{ 'identifier' := binary(),
        'name' := binary()
      }.

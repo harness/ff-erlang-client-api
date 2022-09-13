@@ -1,10 +1,10 @@
--module(cfclient_key_value).
+-module(cfapi_key_value).
 
 -export([encode/1]).
 
--export_type([cfclient_key_value/0]).
+-export_type([cfapi_key_value/0]).
 
--type cfclient_key_value() ::
+-type cfapi_key_value() ::
     #{ 'key' := binary(),
        'value' := binary()
      }.

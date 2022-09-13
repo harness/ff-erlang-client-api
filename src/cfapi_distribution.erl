@@ -1,10 +1,10 @@
--module(cfclient_distribution).
+-module(cfapi_distribution).
 
 -export([encode/1]).
 
--export_type([cfclient_distribution/0]).
+-export_type([cfapi_distribution/0]).
 
--type cfclient_distribution() ::
+-type cfapi_distribution() ::
     #{ 'bucketBy' := binary(),
        'variations' := list()
      }.

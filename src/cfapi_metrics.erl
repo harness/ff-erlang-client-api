@@ -1,10 +1,10 @@
--module(cfclient_metrics).
+-module(cfapi_metrics).
 
 -export([encode/1]).
 
--export_type([cfclient_metrics/0]).
+-export_type([cfapi_metrics/0]).
 
--type cfclient_metrics() ::
+-type cfapi_metrics() ::
     #{ 'targetData' => list(),
        'metricsData' => list()
      }.
