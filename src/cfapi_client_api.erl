@@ -1,6 +1,6 @@
 -module(cfapi_client_api).
 
--export([authenticate/2, authenticate/3,
+-export([authenticate/1, authenticate/2,
          get_all_segments/2, get_all_segments/3,
          get_evaluation_by_identifier/4, get_evaluation_by_identifier/5,
          get_evaluations/3, get_evaluations/4,
@@ -19,14 +19,14 @@ authenticate(Ctx) ->
 
 -spec authenticate(ctx:ctx(), maps:map()) -> {ok, cfapi_authentication_response:cfapi_authentication_response(), cfapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cfapi_utils:response_info()}.
 authenticate(Ctx, Optional) ->
-    _OptionalParams = maps:get(params, Optional, #{}),
+    OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = [<<"/client/auth">>],
     QS = [],
     Headers = [],
-    Body1 = CfapiAuthenticationRequest,
+    Body1 = OptionalParams,
     ContentTypeHeader = cfapi_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
