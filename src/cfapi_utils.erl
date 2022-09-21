@@ -20,7 +20,8 @@ request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
                 _ ->
                     Body
             end,
-
+    %%TODO logger for debugging - remove
+    io:format("request params: ~n~n Url: ~p~n~n Headers: ~p~n~n Body: ~p~n~n Opts: ~p~n~n", [Url, Headers1, Body1, Opts++ConfigHackneyOpts]),
     case hackney:request(Method, Url, Headers1, Body1, Opts++ConfigHackneyOpts) of
         {ok, ClientRef} ->
             %% return value if Opts includes `async`
