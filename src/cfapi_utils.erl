@@ -80,7 +80,7 @@ update_params_with_auth(Cfg, Headers, QS) ->
                 #{type => 'http',
                   key => <<"Authorization">>,
                   in => header}},
-  io:fwrite("~p~n~n",[Auths]), %% TODO debug statement - remove.
+  io:fwrite("Auths map: ~p~n~n",[Auths]), %% TODO debug statement - remove.
 
     maps:fold(fun(AuthName, #{type := _Type,
                               in := In,
