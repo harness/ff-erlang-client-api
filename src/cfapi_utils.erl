@@ -20,7 +20,7 @@ request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
                 _ ->
                     Body
             end,
-  
+
     case hackney:request(Method, Url, Headers1, Body1, Opts++ConfigHackneyOpts) of
         {ok, ClientRef} ->
             %% return value if Opts includes `async`
