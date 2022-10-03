@@ -44,7 +44,7 @@ get_all_segments(Ctx, EnvironmentUUID, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/target-segments">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/target-segments">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -65,7 +65,7 @@ get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/target/", Target, "/evaluations/", Feature, "">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/target/", Target, "/evaluations/", Feature, "">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -86,7 +86,7 @@ get_evaluations(Ctx, EnvironmentUUID, Target, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/target/", Target, "/evaluations">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/target/", Target, "/evaluations">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -105,9 +105,8 @@ get_feature_config(Ctx, EnvironmentUUID) ->
 get_feature_config(Ctx, EnvironmentUUID, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/feature-configs">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/feature-configs">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -128,7 +127,7 @@ get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/feature-configs/", Identifier, "">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/feature-configs/", Identifier, "">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -149,7 +148,7 @@ get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/client/env/", EnvironmentUUID, "/target-segments/", Identifier, "">>],
+    Path = [<<"/client/env/", EnvironmentUUID/binary, "/target-segments/", Identifier, "">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
     Headers = [],
     Body1 = [],
