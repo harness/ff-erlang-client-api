@@ -105,8 +105,6 @@ get_feature_config(Ctx, EnvironmentUUID) ->
 get_feature_config(Ctx, EnvironmentUUID, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-    io:fwrite("~p~n",[EnvironmentUUID]), %% TODO debug statement - remove.
-    io:format("request params: ~p~n~n Optional: ~p~n~n EnvironmentUUID", [Optional, EnvironmentUUID]),
     Method = get,
     Path = [<<"/client/env/", EnvironmentUUID/binary, "/feature-configs">>],
     QS = lists:flatten([])++cfapi_utils:optional_params(['cluster'], _OptionalParams),
