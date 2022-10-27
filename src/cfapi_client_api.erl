@@ -9,7 +9,7 @@
          get_segment_by_identifier/3, get_segment_by_identifier/4,
          stream/2, stream/3]).
 
--define(BASE_URL, <<"/api/1.0">>).
+
 
 %% @doc Authenticate with the admin server.
 %% Used to retrieve all target segments for certain account id.
@@ -30,7 +30,7 @@ authenticate(Ctx, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Retrieve all segments.
 %% Used to retrieve all segments for certain account id.
@@ -51,7 +51,7 @@ get_all_segments(Ctx, EnvironmentUUID, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get feature evaluations for target
 %% 
@@ -72,7 +72,7 @@ get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get feature evaluations for target
 %% 
@@ -93,7 +93,7 @@ get_evaluations(Ctx, EnvironmentUUID, Target, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get all feature flags activations
 %% All feature flags with activations in project environment
@@ -113,7 +113,7 @@ get_feature_config(Ctx, EnvironmentUUID, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get feature config
 %% 
@@ -134,7 +134,7 @@ get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Retrieve a segment by identifier
 %% Used to retrieve a segment for a certain account id by identifier
@@ -155,7 +155,7 @@ get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Stream endpoint.
 %% 
@@ -176,6 +176,6 @@ stream(Ctx, APIKey, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 
