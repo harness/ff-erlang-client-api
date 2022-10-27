@@ -20,7 +20,6 @@ request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
                 _ ->
                     Body
             end,
-  io:format("URL IS: ~p~n \n " , [Url]),
 
     case hackney:request(Method, Url, Headers1, Body1, Opts++ConfigHackneyOpts) of
         {ok, ClientRef} ->
