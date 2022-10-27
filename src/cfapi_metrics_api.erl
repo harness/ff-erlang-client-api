@@ -2,7 +2,7 @@
 
 -export([post_metrics/3, post_metrics/4]).
 
--define(BASE_URL, <<"/api/1.0">>).
+
 
 %% @doc Send metrics to the Analytics server.
 %% Send metrics to Analytics server
@@ -23,6 +23,6 @@ post_metrics(Ctx, Cluster, Environment, Optional) ->
     ContentTypeHeader = cfapi_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    cfapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 
