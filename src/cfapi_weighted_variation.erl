@@ -4,14 +4,6 @@
 
 -export_type([cfapi_weighted_variation/0]).
 
--type cfapi_weighted_variation() ::
-    #{ 'variation' := binary(),
-       'weight' := integer()
-     }.
+-type cfapi_weighted_variation() :: #{variation := binary(), weight := integer()}.
 
-encode(#{ 'variation' := Variation,
-          'weight' := Weight
-        }) ->
-    #{ 'variation' => Variation,
-       'weight' => Weight
-     }.
+encode(#{variation := Variation, weight := Weight}) -> #{variation => Variation, weight => Weight}.

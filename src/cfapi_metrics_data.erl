@@ -4,20 +4,14 @@
 
 -export_type([cfapi_metrics_data/0]).
 
--type cfapi_metrics_data() ::
-    #{ 'timestamp' := integer(),
-       'count' := integer(),
-       'metricsType' := binary(),
-       'attributes' := list()
-     }.
+-type cfapi_metrics_data() :: #{
+                              timestamp := integer(),
+                              count := integer(),
+                              metricsType := binary(),
+                              attributes := list()
+                            }.
 
-encode(#{ 'timestamp' := Timestamp,
-          'count' := Count,
-          'metricsType' := MetricsType,
-          'attributes' := Attributes
-        }) ->
-    #{ 'timestamp' => Timestamp,
-       'count' => Count,
-       'metricsType' => MetricsType,
-       'attributes' => Attributes
-     }.
+encode(
+  #{timestamp := Timestamp, count := Count, metricsType := MetricsType, attributes := Attributes}
+) ->
+  #{timestamp => Timestamp, count => Count, metricsType => MetricsType, attributes => Attributes}.

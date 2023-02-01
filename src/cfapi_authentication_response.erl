@@ -4,11 +4,6 @@
 
 -export_type([cfapi_authentication_response/0]).
 
--type cfapi_authentication_response() ::
-    #{ 'authToken' := binary()
-     }.
+-type cfapi_authentication_response() :: #{authToken := binary()}.
 
-encode(#{ 'authToken' := AuthToken
-        }) ->
-    #{ 'authToken' => AuthToken
-     }.
+encode(#{authToken := AuthToken}) -> #{authToken => AuthToken}.
