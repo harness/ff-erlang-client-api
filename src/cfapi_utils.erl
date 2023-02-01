@@ -56,7 +56,7 @@ select_header_content_type(ContentTypes) ->
   end.
 
 
-auth_with_prefix(#{api_key_prefix := Prefixes} = Cfg, Key, Token) when is_map(Prefixes) ->
+auth_with_prefix(#{api_key_prefix := Prefixes}, Key, Token) when is_map(Prefixes) ->
   case maps:find(Key, Prefixes) of
     {ok, Prefix} -> <<Prefix/binary, " ", Token/binary>>;
     error -> Token

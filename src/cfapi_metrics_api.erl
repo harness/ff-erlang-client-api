@@ -13,14 +13,11 @@ post_metrics(Ctx, Cluster, Environment) -> post_metrics(Ctx, Cluster, Environmen
   {ok, [], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-post_metrics(Ctx, Cluster, Environment, Optional) ->
-  OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = post,
-  Path = [<<"/metrics/", Environment/binary, "">>],
+post_metrics(Ctx, Cluster, Environment, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
+  Path = [<<"/metrics/">>, Environment],
   QS = cfapi_utils:optional_params([cluster], Cluster),
-  Headers = [],
-  Body1 = OptionalParams,
   ContentTypeHeader = cfapi_utils:select_header_content_type([<<"application/json">>]),
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, post, Path, QS, ContentTypeHeader, Params, HackneyOpts, Cfg).

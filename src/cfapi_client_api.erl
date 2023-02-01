@@ -73,15 +73,15 @@ get_evaluation_by_identifier(Ctx, Environment, Feature, Target) ->
   {ok, cfapi_evaluation:cfapi_evaluation(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluation_by_identifier(Ctx, Environment, Feature, Target, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+get_evaluation_by_identifier(Ctx, Environment, Feature, Target, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
   Path =
-    [<<"/client/env/", Environment/binary, "/target/", Target, "/evaluations/", Feature, "">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
+    [<<"/client/env/">>, Environment, <<"/target/">>, Target, <<"/evaluations/">>, Feature],
+  QS = cfapi_utils:optional_params([cluster], Params),
   Headers = cfapi_utils:select_header_content_type([]),
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, get, [Path], QS, Headers, [], Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, get, Path, QS, Headers, [], HackneyOpts, Cfg).
 
 % @doc Get feature evaluations for target
 -spec get_evaluations(ctx:ctx(), binary(), binary()) ->
@@ -102,16 +102,14 @@ get_evaluations(Ctx, Environment, Target) -> get_evaluations(Ctx, Environment, T
   }
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluations(Ctx, Environment, Target, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = get,
-  Path = [<<"/client/env/", Environment/binary, "/target/", Target, "/evaluations">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
+get_evaluations(Ctx, Environment, Target, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
+  Path = [<<"/client/env/">>, Environment, <<"/target/">>, Target, <<"/evaluations">>],
+  QS = cfapi_utils:optional_params([cluster], Params),
   Headers = cfapi_utils:select_header_content_type([]),
-  Body = [],
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, Headers, Body, Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, get, Path, QS, Headers, [], HackneyOpts, Cfg).
 
 % @doc Get all feature flags activations.
 % All feature flags with activations in project environment
@@ -125,17 +123,14 @@ get_feature_config(Ctx, Environment) -> get_feature_config(Ctx, Environment, #{}
   {ok, [cfapi_feature_config:cfapi_feature_config()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_feature_config(Ctx, Environment, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = get,
-  Path = [<<"/client/env/", Environment/binary, "/feature-configs">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
-  Headers = [],
-  Body1 = [],
+get_feature_config(Ctx, Environment, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
+  Path = [<<"/client/env/">>, Environment, <<"/feature-configs">>],
+  QS = cfapi_utils:optional_params([cluster], Params),
   ContentTypeHeader = cfapi_utils:select_header_content_type([]),
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, get, Path, QS, ContentTypeHeader, [], HackneyOpts, Cfg).
 
 % @doc Get feature config.
 -spec get_feature_config_by_identifier(ctx:ctx(), binary(), binary()) ->
@@ -150,16 +145,13 @@ get_feature_config_by_identifier(Ctx, Identifier, Environment) ->
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
 get_feature_config_by_identifier(Ctx, Identifier, Environment, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
+  Params = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = get,
-  Path = [<<"/client/env/", Environment/binary, "/feature-configs/", Identifier, "">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
-  Headers = [],
-  Body1 = [],
+  Path = [<<"/client/env/">>, Environment, <<"/feature-configs/">>, Identifier],
+  QS = cfapi_utils:optional_params([cluster], Params),
   ContentTypeHeader = cfapi_utils:select_header_content_type([]),
   Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
+  cfapi_utils:request(Ctx, get, Path, QS, ContentTypeHeader, [], Opts, Cfg).
 
 % @doc Retrieve a segment by identifier.
 % Used to retrieve a segment for a certain account id by identifier
@@ -174,17 +166,14 @@ get_segment_by_identifier(Ctx, Identifier, Environment) ->
   {ok, cfapi_segment:cfapi_segment(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_segment_by_identifier(Ctx, Identifier, Environment, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = get,
-  Path = [<<"/client/env/", Environment/binary, "/target-segments/", Identifier, "">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
-  Headers = [],
-  Body1 = [],
+get_segment_by_identifier(Ctx, Identifier, Environment, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
+  Path = [<<"/client/env/">>, Environment, <<"/target-segments/">>, Identifier],
+  QS = cfapi_utils:optional_params([cluster], Params),
   ContentTypeHeader = cfapi_utils:select_header_content_type([]),
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, get, Path, QS, ContentTypeHeader, [], HackneyOpts, Cfg).
 
 % @doc Stream endpoint.
 -spec stream(ctx:ctx(), binary()) ->
@@ -196,14 +185,12 @@ stream(Ctx, APIKey) -> stream(Ctx, APIKey, #{}).
   {ok, [], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-stream(Ctx, APIKey, Optional) ->
-  _OptionalParams = maps:get(params, Optional, #{}),
-  Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-  Method = get,
-  Path = [<<"/stream">>],
-  QS = cfapi_utils:optional_params([cluster], _OptionalParams),
-  Headers = [{<<"API-Key">>, APIKey}] ++ cfapi_utils:optional_params([], _OptionalParams),
-  Body1 = [],
+stream(Ctx, APIKey, Opts) ->
+  Params = maps:get(params, Opts, #{}),
+  Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
+  Path = <<"/stream">>,
+  QS = cfapi_utils:optional_params([cluster], Params),
+  Headers = [{<<"API-Key">>, APIKey}] ++ cfapi_utils:optional_params([], Params),
   ContentTypeHeader = cfapi_utils:select_header_content_type([]),
-  Opts = maps:get(hackney_opts, Optional, []),
-  cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
+  HackneyOpts = maps:get(hackney_opts, Opts, []),
+  cfapi_utils:request(Ctx, get, Path, QS, ContentTypeHeader ++ Headers, [], HackneyOpts, Cfg).
