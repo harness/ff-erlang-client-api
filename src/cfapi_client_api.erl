@@ -21,9 +21,8 @@
   ]
 ).
 
-%% @doc Authenticate with the admin server.
-%% Used to retrieve all target segments for certain account id.
-
+% @doc Authenticate with the admin server.
+% Returns all target segments for an account.
 -spec authenticate(ctx:ctx()) ->
   {ok, cfapi_authentication_response:cfapi_authentication_response(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
@@ -46,9 +45,7 @@ authenticate(Ctx, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
 
-%% @doc Retrieve all segments.
-%% Used to retrieve all segments for certain account id.
-
+% @doc Retrieve all segments for an account.
 -spec get_all_segments(ctx:ctx(), binary()) ->
   {ok, [cfapi_segment:cfapi_segment()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
