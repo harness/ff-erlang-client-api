@@ -55,7 +55,7 @@ get_all_segments(Ctx, Environment) -> get_all_segments(Ctx, Environment, #{}).
 get_all_segments(Ctx, Environment, Opts) ->
   Params = maps:get(params, Opts, #{}),
   Cfg = maps:get(cfg, Opts, application:get_env(kuberl, config, #{})),
-  Path = <<"/client/env/", Environment/binary, "/target-segments">>,
+  Path = [<<"/client/env/">>, Environment, <<"/target-segments">>],
   QS = cfapi_utils:optional_params([cluster], Params),
   Headers = cfapi_utils:select_header_content_type([]),
   HackneyOpts = maps:get(hackney_opts, Opts, []),
