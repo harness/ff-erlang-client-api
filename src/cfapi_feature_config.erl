@@ -2,8 +2,6 @@
 
 -export([encode/1]).
 
--export_type([cfapi_feature_config/0]).
-
 -type cfapi_feature_config() :: #{
                                 project := binary(),
                                 environment := binary(),
@@ -18,6 +16,8 @@
                                 variationToTargetMap => list(),
                                 version => integer()
                               }.
+
+-export_type([cfapi_feature_config/0]).
 
 encode(
   #{
