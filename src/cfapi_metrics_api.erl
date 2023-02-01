@@ -20,7 +20,7 @@ post_metrics(Ctx, Cluster, Environment, Optional) ->
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Method = post,
   Path = [<<"/metrics/", Environment/binary, "">>],
-  QS = lists:flatten([]) ++ cfapi_utils:optional_params([cluster], Cluster),
+  QS = cfapi_utils:optional_params([cluster], Cluster),
   Headers = [],
   Body1 = OptionalParams,
   ContentTypeHeader = cfapi_utils:select_header_content_type([<<"application/json">>]),
