@@ -2,9 +2,7 @@
 
 -export([post_metrics/3, post_metrics/4]).
 
-%% @doc Send metrics to the Analytics server.
-%% Send metrics to Analytics server
-
+% @doc Send metrics to the Analytics server.
 -spec post_metrics(ctx:ctx(), binary(), binary()) ->
   {ok, [], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}

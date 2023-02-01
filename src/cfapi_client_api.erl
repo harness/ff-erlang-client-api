@@ -61,7 +61,7 @@ get_all_segments(Ctx, Environment, Opts) ->
   HackneyOpts = maps:get(hackney_opts, Opts, []),
   cfapi_utils:request(Ctx, get, Path, QS, Headers, [], HackneyOpts, Cfg).
 
-% @doc Get feature evaluations for target
+% @doc Get feature evaluations for target.
 -spec get_evaluation_by_identifier(ctx:ctx(), binary(), binary(), binary()) ->
   {ok, cfapi_evaluation:cfapi_evaluation(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
@@ -83,9 +83,7 @@ get_evaluation_by_identifier(Ctx, Environment, Feature, Target, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, get, [Path], QS, Headers, [], Opts, Cfg).
 
-%% @doc Get feature evaluations for target
-%%
-
+% @doc Get feature evaluations for target
 -spec get_evaluations(ctx:ctx(), binary(), binary()) ->
   {
     ok,
@@ -115,9 +113,8 @@ get_evaluations(Ctx, Environment, Target, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, Method, [Path], QS, Headers, Body, Opts, Cfg).
 
-%% @doc Get all feature flags activations
-%% All feature flags with activations in project environment
-
+% @doc Get all feature flags activations.
+% All feature flags with activations in project environment
 -spec get_feature_config(ctx:ctx(), binary()) ->
   {ok, [cfapi_feature_config:cfapi_feature_config()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
@@ -140,9 +137,7 @@ get_feature_config(Ctx, Environment, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
 
-%% @doc Get feature config
-%%
-
+% @doc Get feature config.
 -spec get_feature_config_by_identifier(ctx:ctx(), binary(), binary()) ->
   {ok, cfapi_feature_config:cfapi_feature_config(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
@@ -166,9 +161,8 @@ get_feature_config_by_identifier(Ctx, Identifier, Environment, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
 
-%% @doc Retrieve a segment by identifier
-%% Used to retrieve a segment for a certain account id by identifier
-
+% @doc Retrieve a segment by identifier.
+% Used to retrieve a segment for a certain account id by identifier
 -spec get_segment_by_identifier(ctx:ctx(), binary(), binary()) ->
   {ok, cfapi_segment:cfapi_segment(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
@@ -192,9 +186,7 @@ get_segment_by_identifier(Ctx, Identifier, Environment, Optional) ->
   Opts = maps:get(hackney_opts, Optional, []),
   cfapi_utils:request(Ctx, Method, [Path], QS, ContentTypeHeader ++ Headers, Body1, Opts, Cfg).
 
-%% @doc Stream endpoint.
-%%
-
+% @doc Stream endpoint.
 -spec stream(ctx:ctx(), binary()) ->
   {ok, [], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
