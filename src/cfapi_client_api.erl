@@ -46,7 +46,7 @@ authenticate(Ctx, Opts) ->
   {ok, [cfapi_segment:cfapi_segment()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_all_segments(Ctx, EnvironmentUUID) -> get_all_segments(Ctx, EnvironmentUUID, #{}).
+get_all_segments(Ctx, Environment) -> get_all_segments(Ctx, Environment, #{}).
 
 -spec get_all_segments(ctx:ctx(), binary(), maps:map()) ->
   {ok, [cfapi_segment:cfapi_segment()], cfapi_utils:response_info()}
@@ -66,18 +66,18 @@ get_all_segments(Ctx, Environment, Opts) ->
   {ok, cfapi_evaluation:cfapi_evaluation(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target) ->
-  get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target, #{}).
+get_evaluation_by_identifier(Ctx, Environment, Feature, Target) ->
+  get_evaluation_by_identifier(Ctx, Environment, Feature, Target, #{}).
 
 -spec get_evaluation_by_identifier(ctx:ctx(), binary(), binary(), binary(), maps:map()) ->
   {ok, cfapi_evaluation:cfapi_evaluation(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target, Optional) ->
+get_evaluation_by_identifier(Ctx, Environment, Feature, Target, Optional) ->
   _OptionalParams = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Path =
-    [<<"/client/env/", EnvironmentUUID/binary, "/target/", Target, "/evaluations/", Feature, "">>],
+    [<<"/client/env/", Environment/binary, "/target/", Target, "/evaluations/", Feature, "">>],
   QS = cfapi_utils:optional_params([cluster], _OptionalParams),
   Headers = cfapi_utils:select_header_content_type([]),
   Opts = maps:get(hackney_opts, Optional, []),
@@ -94,7 +94,7 @@ get_evaluation_by_identifier(Ctx, EnvironmentUUID, Feature, Target, Optional) ->
   }
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluations(Ctx, EnvironmentUUID, Target) -> get_evaluations(Ctx, EnvironmentUUID, Target, #{}).
+get_evaluations(Ctx, Environment, Target) -> get_evaluations(Ctx, Environment, Target, #{}).
 
 -spec get_evaluations(ctx:ctx(), binary(), binary(), maps:map()) ->
   {
@@ -104,11 +104,11 @@ get_evaluations(Ctx, EnvironmentUUID, Target) -> get_evaluations(Ctx, Environmen
   }
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_evaluations(Ctx, EnvironmentUUID, Target, Optional) ->
+get_evaluations(Ctx, Environment, Target, Optional) ->
   _OptionalParams = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Method = get,
-  Path = [<<"/client/env/", EnvironmentUUID/binary, "/target/", Target, "/evaluations">>],
+  Path = [<<"/client/env/", Environment/binary, "/target/", Target, "/evaluations">>],
   QS = cfapi_utils:optional_params([cluster], _OptionalParams),
   Headers = cfapi_utils:select_header_content_type([]),
   Body = [],
@@ -122,17 +122,17 @@ get_evaluations(Ctx, EnvironmentUUID, Target, Optional) ->
   {ok, [cfapi_feature_config:cfapi_feature_config()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_feature_config(Ctx, EnvironmentUUID) -> get_feature_config(Ctx, EnvironmentUUID, #{}).
+get_feature_config(Ctx, Environment) -> get_feature_config(Ctx, Environment, #{}).
 
 -spec get_feature_config(ctx:ctx(), binary(), maps:map()) ->
   {ok, [cfapi_feature_config:cfapi_feature_config()], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_feature_config(Ctx, EnvironmentUUID, Optional) ->
+get_feature_config(Ctx, Environment, Optional) ->
   _OptionalParams = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Method = get,
-  Path = [<<"/client/env/", EnvironmentUUID/binary, "/feature-configs">>],
+  Path = [<<"/client/env/", Environment/binary, "/feature-configs">>],
   QS = lists:flatten([]) ++ cfapi_utils:optional_params([cluster], _OptionalParams),
   Headers = [],
   Body1 = [],
@@ -147,18 +147,18 @@ get_feature_config(Ctx, EnvironmentUUID, Optional) ->
   {ok, cfapi_feature_config:cfapi_feature_config(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID) ->
-  get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID, #{}).
+get_feature_config_by_identifier(Ctx, Identifier, Environment) ->
+  get_feature_config_by_identifier(Ctx, Identifier, Environment, #{}).
 
 -spec get_feature_config_by_identifier(ctx:ctx(), binary(), binary(), maps:map()) ->
   {ok, cfapi_feature_config:cfapi_feature_config(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
+get_feature_config_by_identifier(Ctx, Identifier, Environment, Optional) ->
   _OptionalParams = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Method = get,
-  Path = [<<"/client/env/", EnvironmentUUID/binary, "/feature-configs/", Identifier, "">>],
+  Path = [<<"/client/env/", Environment/binary, "/feature-configs/", Identifier, "">>],
   QS = lists:flatten([]) ++ cfapi_utils:optional_params([cluster], _OptionalParams),
   Headers = [],
   Body1 = [],
@@ -173,18 +173,18 @@ get_feature_config_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
   {ok, cfapi_segment:cfapi_segment(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID) ->
-  get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID, #{}).
+get_segment_by_identifier(Ctx, Identifier, Environment) ->
+  get_segment_by_identifier(Ctx, Identifier, Environment, #{}).
 
 -spec get_segment_by_identifier(ctx:ctx(), binary(), binary(), maps:map()) ->
   {ok, cfapi_segment:cfapi_segment(), cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
-get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
+get_segment_by_identifier(Ctx, Identifier, Environment, Optional) ->
   _OptionalParams = maps:get(params, Optional, #{}),
   Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
   Method = get,
-  Path = [<<"/client/env/", EnvironmentUUID/binary, "/target-segments/", Identifier, "">>],
+  Path = [<<"/client/env/", Environment/binary, "/target-segments/", Identifier, "">>],
   QS = lists:flatten([]) ++ cfapi_utils:optional_params([cluster], _OptionalParams),
   Headers = [],
   Body1 = [],
@@ -200,7 +200,6 @@ get_segment_by_identifier(Ctx, Identifier, EnvironmentUUID, Optional) ->
   | {ok, hackney:client_ref()}
   | {error, term(), cfapi_utils:response_info()}.
 stream(Ctx, APIKey) -> stream(Ctx, APIKey, #{}).
-
 -spec stream(ctx:ctx(), binary(), maps:map()) ->
   {ok, [], cfapi_utils:response_info()}
   | {ok, hackney:client_ref()}
