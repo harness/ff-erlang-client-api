@@ -41,11 +41,10 @@ decode_response(Headers, Body) ->
   end.
 
 
-optional_params([], _Params) -> [];
+-spec optional_params([atom()], map()) -> [{atom(), term()}].
+optional_params(Keys, Params) -> maps:to_list(maps:with(Keys, Params)).
 
-optional_params(Keys, Params) ->
-  [{Key, maps:get(Key, Params)} || Key <- Keys, maps:is_key(Key, Params)].
-
+-spec select_header_content_type([binary()]) -> [{Name :: binary(), Value :: binary()}].
 select_header_content_type([]) -> [];
 
 select_header_content_type(ContentTypes) ->
