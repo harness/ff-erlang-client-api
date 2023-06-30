@@ -1,6 +1,6 @@
 {application, cfapi,
  [{description, "OpenAPI Client libary for Harness Feature Flags Erlang Server SDK"},
-  {vsn, "1.0.0"},
+  {vsn, "1.0.1"},
   {pkg_name, "harness_ff_erlang_client_api"},
   {registered, []},
   {applications,
