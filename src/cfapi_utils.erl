@@ -35,7 +35,8 @@ request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
             {ok, ResponseBody} = hackney:body(ClientRef),
             Resp = decode_response(RespHeaders, ResponseBody),
             {error, Resp, #{status => Status,
-                            headers => RespHeaders}}
+                            headers => RespHeaders}};
+        {error, Reason} -> {error, Reason}
     end.
 
 decode_response(Headers, Body) ->
