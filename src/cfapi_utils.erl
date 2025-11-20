@@ -40,7 +40,8 @@ request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
     end.
 
 decode_response(Headers, Body) ->
-    case lists:keyfind(<<"Content-Type">>, 1, Headers) of
+    Headers1 = to_lower(Headers),
+    case lists:keyfind(<<"content-type">>, 1, Headers1) of
         {_, <<"application/json", _/binary>>} ->
             jsx:decode(Body, [return_maps, {labels, atom}]);
         %% TODO: yml, protobuf, user defined function
@@ -96,3 +97,9 @@ update_params_with_auth(Cfg, Headers, QS) ->
                               end
                       end
               end, {Headers, QS}, Auths).
+
+to_lower(TupleList) ->
+  lists:map(fun(Tuple) ->
+              LowercasedFirst = string:lowercase(element(1, Tuple)),
+              setelement(1, Tuple, LowercasedFirst)
+            end, TupleList).
